@@ -62,7 +62,7 @@ app.get('/', function(req,res)
 
 });
 
-app.listen('0.0.0.0',80);
+app.listen(12);
 console.log('Server open\n');
 
 
