@@ -16,6 +16,7 @@ app.use('/bootstrap', express.static(__dirname + '/views/bootstrap'));
 app.use('/css', express.static(__dirname + '/views/css'));
 
 
+
 //app.all("*", function(req, res, next)
 //{   //when user request
 //    console.log(' ! user request');
@@ -60,7 +61,6 @@ app.get('/', function(req,res)
     res.end();
 
 });
-
 
 app.listen(80);
 console.log('Server open\n');
