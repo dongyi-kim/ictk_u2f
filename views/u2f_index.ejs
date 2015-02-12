@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Signin Template for Bootstrap</title>
+
+    <script src="chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js"></script>
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap/dist/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="/css/signin.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <form class="form-signin" method="post" action="/u2f/sign_up">
+        <h2 class="form-signin-heading">Please sign in</h2>
+        <label for="inputEmail" class="sr-only">Email address</label>
+        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="user_email" value='<%=user_email%>'   required autofocus>
+        <label for="inputPassword" class="sr-only">Password</label>
+        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="user_passwd" required>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign In</button>
+
+    </form>
+
+</div> <!-- /container -->
+
+<script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
+<% if (req_Sign_up == true) { %>
+<!-- Modal -->
+<div id="promptModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <h3 id="myModalLabel">Performing U2F action</h3>
+    </div>
+    <div class="modal-body">
+        <p>Please touch the flashing U2F device now.</p>
+        <p>You may be prompted to allow the site permission to access your security keys. After granting permission, the device will start to blink.</p>
+    </div>
+    <div class="modal-footer">
+        <a class="btn btn-default" href="javascript:history.back()">Abort</a>
+    </div>
+</div>
+
+<script>
+    setTimeout(function() {
+        var request = {"challenge": "aj9cx6Cp-rLu1ynd4sBq8yQgAQ5XaHyfJJSHdX-OOgc", "version": "U2F_V2", "appId": "http://www.kd2.kr"};
+        console.log("Register: ", request);
+        $('#promptModal').modal('show');
+        u2f.register([request], [], function(data) {
+            console.log("Register callback", data);
+            $('#promptModal').modal('hide');
+            $('#bind-data').val(JSON.stringify(data));
+            $('#bind-form').submit();
+        });
+    }, 1000);
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        if(location.protocol == 'http:' && bowser.chrome && bowser.version >= 41) {
+            alert('22');
+            console.log('Using native U2F support');
+            var tag = document.createElement('script');
+            tag.setAttribute('src', 'js/u2f-api.js');
+            document.getElementsByTagName('head')[0].appendChild(tag);
+        } else if(window.u2f === undefined) {
+            $(".app_hide").show();
+            if(!bowser.chrome) {
+                $('.not_chrome').show();
+                $('.chrome').hide();
+            }
+        }
+
+        $('a[data-toggle="tab"]').on('shown', function (e) {
+            $('input[name=username]', $(e.target).attr('data-target')).focus();
+        });
+    });
+</script>
+
+<% } %>
+
+
+
+</body>
+</html>
