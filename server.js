@@ -14,6 +14,7 @@ app.set('view options', {
 app.use('/public', express.static(__dirname));
 app.use('/bootstrap', express.static(__dirname + '/views/bootstrap'));
 app.use('/css', express.static(__dirname + '/views/css'));
+app.use('/js', express.static(__dirname + '/views/js'));
 
 
 
@@ -49,7 +50,20 @@ app.get('/u2f', function(req, res) {
 app.post('/u2f/sign_up', function(req,res)
 {
     console.log(' - user access the sign up page');
+
     res.render('./u2f_index.ejs', {user_email : req.params.user_email, req_Sign_up : true  });
+    console.log(' - render');
+    var u2f_req = u2f.request("http://www.kd2.kr");
+    console.log(' - send req');
+
+    var checkers = u2f.checkRegistration(u2f_req, res);
+    if(checkers.successful)
+    {
+        console.log(' - success');
+    }else
+    {
+        console.log(' - fail');
+    }
     //res.end();
 
 });
