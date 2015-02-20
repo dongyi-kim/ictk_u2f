@@ -14,6 +14,7 @@
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="/bootstrap/dist/css/bootstrap-responsive.min.css" rel="stylesheet">
+
     <!-- Custom styles for this template -->
     <link href="/css/signin.css" rel="stylesheet">
 
@@ -36,6 +37,7 @@
                 var request = {"challenge": "aj9cx6Cp-rLu1ynd4sBq8yQgAQ5XaHyfJJSHdX-OOgc", "version": "U2F_V2", "appId": "http://www.kd2.kr"};
                 console.log("Register: ", request);
                 alert('222');
+
                 $('#promptModal').modal('show');
                 u2f.register([request], [], function(data) {
                     console.log("Register callback", data);
@@ -50,7 +52,6 @@
     </form>
 
 </div> <!-- /container -->
-
 
 <% if (req_Sign_up == true) { %>
 
@@ -92,11 +93,11 @@
     });
 </script>
 <% } %>
-
-
 <script src="/js/jquery-2.1.3.min.js"></script>
 <script src="/js/bowser.min.js"></script>
 <script src="/bootstrap/dist/js/bootstrap.min.js"></script>
+
+
 
 </body>
 </html>
