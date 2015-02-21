@@ -40,6 +40,12 @@ app.get('/u2f', function(req, res) {
     //res.end();
 });
 
+app.get('/', function(req,res)
+{
+    console.log(' - user access the index page ');
+    res.render('./index.ejs', {});
+});
+
 app.post('/u2f', function(req,res)
 {
     //var u2f_req = u2f.request("http://www.kd2.kr");
@@ -72,18 +78,10 @@ app.post('/u2f', function(req,res)
 app.post('/u2f/sign_up', function(req,res)
 {
     console.log(' - user access the sign up page');
-
     res.render('./u2f_index.ejs', {user_email : req.params.user_email, req_Sign_up : true  });
     console.log(' - render');
 });
 
-app.get('/', function(req,res)
-{
-    console.log(' - user access the index page ');
-
-    res.end();
-
-});
 
 app.listen(80);
 console.log('Server open\n');
