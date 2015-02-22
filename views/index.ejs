@@ -1,6 +1,6 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,7 +10,6 @@
 
     <title>Signin Template for Bootstrap</title>
 
-    <script src="chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js"></script>
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -21,7 +20,7 @@
 
 <body>
 
-<div class="modal fade">
+<div id="promptModal" class="modal fade" >
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -39,7 +38,15 @@
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 
+<script>
+//    $('#promptModal').modal('show');
+//    function doLogin()
+//    {
+//        $('#promptModal').modal('show');
+//    }
+</script>
 
+<script src="chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/bowser.min.js"></script>
@@ -47,10 +54,7 @@
 <script type="text/javascript">
     //alert('00');
     $(document).ready(function() {
-        setTimeout(function(){
-            $('#promptModal').modal('show');
-        },1000);
-
+        $('#promptModal').modal('show');
     });
 </script>
 
