@@ -8,6 +8,7 @@ var http = require('http');
 var https = require('https');
 
 var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.readFileSync('cert.pem')},app).listen(443);
+var httpServer = http.createServer(app).listen(80);
 
 
 app.set('port',443);
@@ -22,7 +23,6 @@ app.use('/public', express.static(__dirname));
 app.use('/bootstrap', express.static(__dirname + '/views/bootstrap'));
 app.use('/css', express.static(__dirname + '/views/css'));
 app.use('/js', express.static(__dirname + '/views/js'));
-
 
 
 //app.all("*", function(req, res, next)
@@ -41,6 +41,11 @@ app.use('/js', express.static(__dirname + '/views/js'));
 
 // yubico u2f id-page
 app.get('/u2f', function(req, res) {
+    if(!req.secure)
+    {
+        //redirect http to https
+        return res.redirect('https://'+req.headers.host + req.url);
+    }
     console.log(' - user access the u2f page');
     res.render('./u2f_index.ejs', { user_email : '' , req_Sign_up : false} );
     //res.end();
@@ -118,8 +123,6 @@ app.post('/u2f/sign_up', function(req,res)
     console.log(' - render');
 });
 
-
-app.listen(80);
 console.log('Server open\n');
 
 
