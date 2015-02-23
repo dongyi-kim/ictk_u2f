@@ -40,8 +40,8 @@
       <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.107142" vertical-offset="3518" max-vertical-offset="12630">
-              <caret line="259" column="57" selection-start-line="259" selection-start-column="57" selection-end-line="259" selection-end-column="57" />
+            <state vertical-scroll-proportion="-13.107142" vertical-offset="3533" max-vertical-offset="12645">
+              <caret line="260" column="57" selection-start-line="260" selection-start-column="57" selection-end-line="260" selection-end-column="57" />
               <folding />
             </state>
           </provider>
@@ -358,7 +358,13 @@
       <option name="project" value="LOCAL" />
       <updated>1424671821141</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="u2f lib used, no error, no test 2">
+      <created>1424672268807</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1424672268807</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -426,7 +432,8 @@
     <MESSAGE value="in dong-hae&#10;modal doesn't show" />
     <MESSAGE value="in dong-hae&#10;modal doesn't show 2" />
     <MESSAGE value="u2f lib used, no error, no test" />
-    <option name="LAST_COMMIT_MESSAGE" value="u2f lib used, no error, no test" />
+    <MESSAGE value="u2f lib used, no error, no test 2" />
+    <option name="LAST_COMMIT_MESSAGE" value="u2f lib used, no error, no test 2" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -820,8 +827,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.107142" vertical-offset="3518" max-vertical-offset="12630">
-          <caret line="259" column="57" selection-start-line="259" selection-start-column="57" selection-end-line="259" selection-end-column="57" />
+        <state vertical-scroll-proportion="-13.107142" vertical-offset="3533" max-vertical-offset="12645">
+          <caret line="260" column="57" selection-start-line="260" selection-start-column="57" selection-end-line="260" selection-end-column="57" />
           <folding />
         </state>
       </provider>
