@@ -30,8 +30,8 @@
       <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5726872" vertical-offset="705" max-vertical-offset="2415">
-              <caret line="73" column="34" selection-start-line="73" selection-start-column="34" selection-end-line="73" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.13215859" vertical-offset="795" max-vertical-offset="2415">
+              <caret line="59" column="34" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
               <folding />
             </state>
           </provider>
@@ -40,7 +40,7 @@
       <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="4125" max-vertical-offset="13860">
+            <state vertical-scroll-proportion="0.0" vertical-offset="4125" max-vertical-offset="13965">
               <caret line="275" column="16" selection-start-line="275" selection-start-column="16" selection-end-line="275" selection-end-column="16" />
               <folding />
             </state>
@@ -446,7 +446,13 @@
       <option name="project" value="LOCAL" />
       <updated>1424679319050</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="test 1">
+      <created>1424680248018</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1424680248018</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -520,7 +526,8 @@
     <MESSAGE value="u2f lib https&#10; -app id modified &#10;" />
     <MESSAGE value="https redirecting added" />
     <MESSAGE value="오타수정" />
-    <option name="LAST_COMMIT_MESSAGE" value="오타수정" />
+    <MESSAGE value="test 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="test 1" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -885,7 +892,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="4125" max-vertical-offset="13860">
+        <state vertical-scroll-proportion="0.0" vertical-offset="4125" max-vertical-offset="13965">
           <caret line="275" column="16" selection-start-line="275" selection-start-column="16" selection-end-line="275" selection-end-column="16" />
           <folding />
         </state>
@@ -909,8 +916,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5726872" vertical-offset="705" max-vertical-offset="2415">
-          <caret line="73" column="34" selection-start-line="73" selection-start-column="34" selection-end-line="73" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.13215859" vertical-offset="795" max-vertical-offset="2415">
+          <caret line="59" column="34" selection-start-line="59" selection-start-column="34" selection-end-line="59" selection-end-column="34" />
           <folding />
         </state>
       </provider>
