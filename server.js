@@ -7,10 +7,10 @@ var fs = require('fs');
 var http = require('http');
 var https = require('https');
 
-var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.read('cert.pem')},app).listen(443);
+var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.readFileSync('cert.pem')},app).listen(443);
 
 
-//app.set('port',80);
+app.set('port',443);
 app.set('view engine', 'ejs');
 app.set('view options', {
     layout: false
