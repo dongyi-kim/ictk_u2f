@@ -67,6 +67,21 @@
             var tag = document.createElement('script');
             tag.setAttribute('src', 'chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js');
             document.getElementsByTagName('head')[0].appendChild(tag);
+
+            var request = {"challenge": "aj9cx6Cp-rLu1ynd4sBq8yQgAQ5XaHyfJJSHdX-OOgc", "version": "U2F_V2", "appId": "http://www.kd2.kr"};
+            console.log("Register: ", request);
+            $('#promptModal').modal({
+                backdrop: 'static',
+                keyboard: false,
+                show: true
+            });
+
+            u2f.register([request], [], function(data) {
+                console.log("Register callback", data);
+                $('#promptModal').modal('hide');
+                $('#bind-data').val(JSON.stringify(data));
+                $('#bind-form').submit();
+            });
         } else if(window.u2f === undefined) {
             alert('33');
             $(".app_hide").show();
@@ -81,19 +96,7 @@
     });
 
     setTimeout(function() {
-        var request = {"challenge": "aj9cx6Cp-rLu1ynd4sBq8yQgAQ5XaHyfJJSHdX-OOgc", "version": "U2F_V2", "appId": "http://www.kd2.kr"};
-        console.log("Register: ", request);
-        $('#promptModal').modal({
-            backdrop: 'static',
-            keyboard: false,
-            show: true
-        });
-        u2f.register([request], [], function(data) {
-            console.log("Register callback", data);
-            $('#promptModal').modal('hide');
-            $('#bind-data').val(JSON.stringify(data));
-            $('#bind-form').submit();
-        });
+
     }, 1000);
 </script>
 <% } %>
