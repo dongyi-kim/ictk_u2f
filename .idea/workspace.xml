@@ -30,8 +30,8 @@
       <file leaf-file-name="server.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7488987" vertical-offset="645" max-vertical-offset="2280">
-              <caret line="77" column="7" selection-start-line="77" selection-start-column="7" selection-end-line="77" selection-end-column="7" />
+            <state vertical-scroll-proportion="0.7488987" vertical-offset="615" max-vertical-offset="2265">
+              <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -40,7 +40,7 @@
       <file leaf-file-name="workspace.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.107142" vertical-offset="3533" max-vertical-offset="12840">
+            <state vertical-scroll-proportion="-13.107142" vertical-offset="3533" max-vertical-offset="12945">
               <caret line="260" column="57" selection-start-line="260" selection-start-column="57" selection-end-line="260" selection-end-column="57" />
               <folding />
             </state>
@@ -370,7 +370,13 @@
       <option name="project" value="LOCAL" />
       <updated>1424672283472</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="u2f lib used, no error, no test 3&#10;">
+      <created>1424672721442</created>
+      <option name="number" value="00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1424672721442</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
@@ -439,7 +445,8 @@
     <MESSAGE value="in dong-hae&#10;modal doesn't show 2" />
     <MESSAGE value="u2f lib used, no error, no test" />
     <MESSAGE value="u2f lib used, no error, no test 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="u2f lib used, no error, no test 2" />
+    <MESSAGE value="u2f lib used, no error, no test 3&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="u2f lib used, no error, no test 3&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -833,7 +840,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.107142" vertical-offset="3533" max-vertical-offset="12840">
+        <state vertical-scroll-proportion="-13.107142" vertical-offset="3533" max-vertical-offset="12945">
           <caret line="260" column="57" selection-start-line="260" selection-start-column="57" selection-end-line="260" selection-end-column="57" />
           <folding />
         </state>
@@ -841,8 +848,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7488987" vertical-offset="645" max-vertical-offset="2280">
-          <caret line="77" column="7" selection-start-line="77" selection-start-column="7" selection-end-line="77" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.7488987" vertical-offset="615" max-vertical-offset="2265">
+          <caret line="75" column="0" selection-start-line="75" selection-start-column="0" selection-end-line="75" selection-end-column="0" />
           <folding />
         </state>
       </provider>
