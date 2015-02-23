@@ -61,10 +61,6 @@ app.post('/u2f', function(req,res)
     var request = u2flib.request(appId,function()
     {
         console.log(' - request ended.');
-        console.log(request);
-
-        res.render('./u2f_index.ejs', {user_email : req.params.user_email, req_Sign_up : true });
-        console.log(' - rendered.');
 
         var u2f_res = u2flib.checkRegistration(request, result);
         console.log(u2f_res)
@@ -77,8 +73,11 @@ app.post('/u2f', function(req,res)
         }
     });
     request.challenge = "vqrS6WXDe1JUs5_c3i4-LkKIHRr-3XVb3azuA5TifHo"; // We have a fixed challenge.
-    console.log(' - request send.');
 
+    console.log(' - request send :' + request);
+
+    res.render('./u2f_index.ejs', {user_email : req.params.user_email, req_Sign_up : true });
+    console.log(' - rendered.');
 
 
     var result = {

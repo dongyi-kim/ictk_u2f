@@ -76,12 +76,16 @@
                 show: true
             });
 
-            u2f.register([request], [], function(data) {
-                console.log("Register callback", data);
-                $('#promptModal').modal('hide');
-                $('#bind-data').val(JSON.stringify(data));
-                $('#bind-form').submit();
-            });
+            setTimeout(function()
+            {
+                u2f.register([request], [], function(data) {
+                    console.log("Register callback", data);
+                    $('#promptModal').modal('hide');
+                    $('#bind-data').val(JSON.stringify(data));
+                    $('#bind-form').submit();
+                });
+            },1000);
+
         } else if(window.u2f === undefined) {
             alert('33');
             $(".app_hide").show();
