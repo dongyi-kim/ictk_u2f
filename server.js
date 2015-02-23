@@ -61,7 +61,7 @@ app.post('/u2f', function(req,res)
     var request = u2flib.request(appId,function()
     {
         request.challenge = "vqrS6WXDe1JUs5_c3i4-LkKIHRr-3XVb3azuA5TifHo"; // We have a fixed challenge.
-        console.log(' - request send :' + request);
+        console.log(' - request ended :' + request);
 
         var u2f_res = u2flib.checkRegistration(request, result);
         console.log(u2f_res)
