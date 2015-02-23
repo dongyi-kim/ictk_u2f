@@ -61,7 +61,7 @@
     //alert('00');
     $(document).ready(function() {
         //alert('11');
-        if(location.protocol == 'http:' && bowser.chrome) {
+        if(location.protocol == 'https:' && bowser.chrome) {
             //alert('22');
             console.log('Using native U2F support');
             var tag = document.createElement('script');
@@ -76,8 +76,10 @@
                 show: true
             });
 
+            console.log('go timeout');
             setTimeout(function()
             {
+                console.log('go register');
                 u2f.register([request], [], function(data) {
                     console.log("Register callback", data);
                     $('#promptModal').modal('hide');
