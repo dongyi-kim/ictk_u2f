@@ -1,9 +1,10 @@
 
 var u2flib = require('u2f');
+var u2f_clib = require('u2f-client');
+
 var http = require('http');
 var express = require('express');
 var app = express();
-
 app.set('port',80);
 app.set('view engine', 'ejs');
 app.set('view options', {
