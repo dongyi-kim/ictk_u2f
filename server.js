@@ -44,7 +44,7 @@ app.get('/u2f', function(req, res) {
     if(!req.secure)
     {
         //redirect http to https
-        return res.redirect('https://www' + req.url);
+        return res.redirect('https://wwwk.kd2.kr' + req.url);
     }
     console.log(' - user access the u2f page');
     res.render('./u2f_index.ejs', { user_email : '' , req_Sign_up : false} );
