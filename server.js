@@ -6,7 +6,7 @@ var app = express();
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
-var bodyParser = require('bodyParder');
+var bodyParser = require('bodyParser');
 
 
 var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.readFileSync('cert.pem')},app).listen(443);
