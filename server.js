@@ -116,6 +116,8 @@ app.get('/main', function(req,res)
 });
 app.post('/main', function(req,res){
     console.log(' - access main page with trying to log in');
+    console.log(req.body);
+    console.log(req.params);
     var tryU2F = (req.params.c_data == null);
 
     res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : 'Home', tryLogin : true, tryU2F:tryU2F});
