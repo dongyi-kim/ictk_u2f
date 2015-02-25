@@ -24,6 +24,8 @@ app.use('/bootstrap', express.static(__dirname + '/views/bootstrap'));
 app.use('/css', express.static(__dirname + '/views/css'));
 app.use('/js', express.static(__dirname + '/views/js'));
 
+app.use(express.urlencoded());
+app.use(express.json());
 
 //app.all("*", function(req, res, next)
 //{   //when user request
