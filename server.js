@@ -116,10 +116,10 @@ app.get('/main', function(req,res)
 });
 app.post('/main', function(req,res){
     console.log(' - access main page with trying to log in');
-    var tryU2F = true;
+    var tryU2F = false;
     if(req.params.c_data != null)
     {
-        tryU2F = false;
+        tryU2F = true;
     }
     res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : 'Home', tryLogin : true, tryU2F:tryU2F});
 });
