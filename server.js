@@ -121,7 +121,7 @@ app.post('/main', function(req,res){
     {
         tryU2F = true;
     }
-    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : 'Home', tryLogin : true, tryU2F:true});
+    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : 'Home', tryLogin : true, tryU2F:tryU2F});
 });
 
 
