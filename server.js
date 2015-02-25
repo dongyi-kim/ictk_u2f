@@ -103,6 +103,11 @@ app.post('/u2f', function(req,res)
 var arrTabMain = ['Home', 'Register', 'Contact', 'About'];
 app.get('/main', function(req,res)
 {
+    if(!req.secure)
+    {
+        //redirect http to https
+        return res.redirect('https://www.' + req.host + req.url);
+    }
     console.log(' - access main page');
     var activeTab = req.query.tab;
     if(activeTab == null)
