@@ -179,7 +179,7 @@
                             u2f.register([request], [], function(data) {
                                 console.log("Register callback", data);
                                 $('#promptModal').modal('hide');
-                                $('#bind_data').val(JSON.stringify(data));
+                                $('#bind-data').val(JSON.stringify(data));
                                 $('#bind-form').submit();
                             });
                         },1000);
