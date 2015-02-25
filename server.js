@@ -6,6 +6,8 @@ var app = express();
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
+var bodyParser = require('bodyParder');
+
 
 var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.readFileSync('cert.pem')},app).listen(443);
 var httpServer = http.createServer(app).listen(80);
@@ -24,8 +26,8 @@ app.use('/bootstrap', express.static(__dirname + '/views/bootstrap'));
 app.use('/css', express.static(__dirname + '/views/css'));
 app.use('/js', express.static(__dirname + '/views/js'));
 
-app.use(express.urlencoded());
-app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //app.all("*", function(req, res, next)
 //{   //when user request
