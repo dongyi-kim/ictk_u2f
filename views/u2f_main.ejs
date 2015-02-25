@@ -1,73 +1,85 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
 
-    <title>Cover Template for Bootstrap</title>
+    <title>Justified Nav Template for Bootstrap</title>
+
+
+    <link href="/css/signin.css" rel="stylesheet">
 
     <!-- Bootstrap core CSS -->
     <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="/css/black_cover.css" rel="stylesheet">
+    <link href="/css/justified-nav.css" rel="stylesheet">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 </head>
 
 <body>
 
-<div class="site-wrapper">
-    <div class="site-wrapper-inner">
-        <div class="cover-container">
-            <div class="masthead clearfix">
-                <div class="inner">
-                    <h3 class="masthead-brand">ICTK</h3>
-                    <nav>
-                        <ul class="nav masthead-nav">
-                            <% for(var i=0; i<menu.length; i++)  {  %>
-                                <li <% if(menu[i]==selected) { %>class="active" <% } %>><a href='?Tab=<%=menu[i] %>'> <%=menu[i] %> </a></li>
-                            <% } %>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
+<div class="container">
 
-            <div class="inner cover">
-                <% if(selected=='Home') { %>
-                    <h1 class="cover-heading">FIDO U2F Test Page.</h1>
-                    <p class="lead">This page is for testing u2f-library in ICTK.<br>FIDO U2F USB Key is needed to use this page.<br>dy.kim@ictk.com</p>
-                    <p class="lead">
-                        <a href="#" class="btn btn-lg btn-default">Log in</a>
-                    </p>
-                <% } else if(selected =='Register') { %>
-
-                <% } else if(selected =='Contact') { %>
-
-                <% } else { %>
-
+    <div class="masthead">
+        <h3 class="text-muted">ICTK U2F</h3>
+        <nav>
+            <ul class="nav nav-justified">
+                <% for(var i in arrTab ) { %>
+                    <li <% if(arrTab[i]==activeTab) { %> class="active" <% }%> ><a href="?tab=<%=arrTab[i]%>"><%=arrTab[i]%></a></li>
                 <% } %>
-
-            </div>
-
-            <div class="mastfoot">
-                <div class="inner">
-                    <p>Contact <a href="http://www.ictk.com">ICTK</a>, Developer <a href="mailto:dy.kim@ictk.com">dy.kim@ictk.com</a>.</p>
-                </div>
-            </div>
-
-        </div>
-
+            </ul>
+        </nav>
     </div>
 
-</div>
+    <% if(activeTab == 'Home') {  %>
+
+        <!-- Jumbotron -->
+        <div class="jumbotron">
+            <h1>Marketing stuff!</h1>
+            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
+            <% if(tryLogin == null || tryLogin == false) { %>
+                <p><a class="btn btn-lg btn-success" role="button" onclick="showModal();" >Log in with your U2F</a></p>
+            <% } %>
+        </div>
+
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Safari bug warning!</h2>
+                <p class="text-danger">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+                <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+        </div>
+    <% } else if(activeTab=='Register') { %>
+
+    <% } else if(activeTab=='About') { %>
+
+    <% } else if(activeTab=='Contact') { %>
+
+    <% } %>
+
+    <!-- Site footer -->
+    <footer class="footer">
+        <p>&copy; ICTK dy.kim</p>
+    </footer>
+
+</div> <!-- /container -->
 
 <!-- Bootstrap core JavaScript
 ================================================== -->
@@ -76,6 +88,92 @@
 <script src="/bootstrap/js/bootstrap.min.js"></script>
 <script src="/js/bowser.min.js"></script>
 <script src="chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js"></script>
+
+
+<% if(activeTab == 'Home') { %>
+    <% if(tryLogin == null || tryLogin == false) { %>
+        <!-- Modal -->
+        <div id="loginModal" class="modal fade"  >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                        <h4 class="modal-title">Yubico Challenge</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-signin" method="post" action="#">
+                            <label for="inputEmail" class="sr-only">Email address</label>
+                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="user_email" required autofocus>
+                            <label for="inputPassword" class="sr-only">Password</label>
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="user_passwd" required>
+                            <button class="btn btn-lg btn-primary btn-block" href="#">Sign In</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" onClick="history.go(-1);">Abort</button>
+                        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <script>
+            function showModal()
+            {
+                $('#loginModal').modal('show');
+            }
+        </script>
+    <% } else { %>
+        <!-- Modal -->
+        <div id="promptModal" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                        <h4 class="modal-title">Yubico Challenge</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please identify yourself with yubico-u2f key</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" onClick="history.go(-1);">Abort</button>
+                        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <script>
+            $(document).ready(function() {
+                //alert('11');
+                if(location.protocol == 'https:' && bowser.chrome) {
+                    //alert('22');
+                    console.log('Using native U2F support');
+                    var tag = document.createElement('script');
+                    tag.setAttribute('src', 'chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js');
+                    document.getElementsByTagName('head')[0].appendChild(tag);
+
+                    var request = {"challenge": "aj9cx6Cp-rLu1ynd4sBq8yQgAQ5XaHyfJJSHdX-OOgc", "version": "U2F_V2", "appId": "https://www.kd2.kr"};
+                    console.log("Register: ", request);
+                    $('#promptModal').modal({
+                        backdrop: 'static',
+                        keyboard: false,
+                        show: true
+                    });
+
+                    console.log('go register');
+                    u2f.register([request], [], function(data) {
+                        console.log("Register callback", data);
+                        $('#promptModal').modal('hide');
+                        //$('#bind-data').val(JSON.stringify(data));
+                        //$('#bind-form').submit();
+                    });
+
+                }
+            });
+        </script>
+    <% } %>
+<% } %>
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 </body>

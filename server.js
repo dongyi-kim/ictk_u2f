@@ -84,7 +84,7 @@ app.get('/u2f', function(req, res) {
     if(!req.secure)
     {
         //redirect http to https
-        return res.redirect('https://www.kd2.kr' + req.url);
+        return res.redirect('https://www.' + req.host + req.url);
     }
     console.log(' - user access the u2f page');
     res.render('./u2f_index.ejs', { user_email : '' , req_Sign_up : false} );
@@ -100,18 +100,20 @@ app.post('/u2f', function(req,res)
     console.log(' - rendered.');
 });
 
+var arrTabMain = ['Home', 'Register', 'Contact', 'About'];
 app.get('/main', function(req,res)
 {
     console.log(' - access main page');
-    if(req.query.Tab == null)
-        return res.redirect('/main?Tab=Home');
-
-    var Selected = req.query.Tab;
-    if(Selected == '' || Selected == null)
-        Selected = 'Home';
-
-    res.render('./u2f_main.ejs',{ menu : ['Home','Register', 'Contact'], selected : Selected});
+    var activeTab = req.query.tab;
+    if(activeTab == null)
+        activeTab = arrTabMain[0];
+    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : activeTab, tryLogin : null });
 });
+app.post('/main', function(req,res){
+    console.log(' - access main page with trying to log in');
+    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : 'Home', tryLogin : true});
+});
+
 
 console.log('Server open\n');
 
