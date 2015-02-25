@@ -116,7 +116,7 @@ app.get('/main', function(req,res)
 });
 app.post('/main', function(req,res){
     console.log(' - access main page with trying to log in');
-    var tryU2F = false;
+    var tryU2F = null;
     if(req.params.c_data != null)
     {
         tryU2F = true;
