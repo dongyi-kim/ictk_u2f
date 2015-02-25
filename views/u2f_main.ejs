@@ -143,7 +143,7 @@
                                 <strong>Origin:</strong> https://www.kd2.kr<br />
                                 <strong>U2F enroll data: </strong><pre>{"challenge": "XKN8Av3g-JVyksKaYVibGqR-Hn6uihwMPzXNInh3RG4", "version": "U2F_V2", "appId": "https://www.kd2.kr"}</pre><br />
                             </p>
-                            <textarea id="bind-data" name="data" class="span11 app_hide" style="display: none;" rows="8"></textarea>
+                            <textarea id="bind_data" name="data" class="span11 app_hide" style="display: none;" rows="8"></textarea>
                             <br/>
                             <input type="submit" class="btn btn-success app_hide" style="display: none;" value="Register" />
                         </form>
@@ -156,36 +156,39 @@
             </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
 
-        <script>
-            $(document).ready(function() {
-                //alert('11');
-                if(location.protocol == 'https:' && bowser.chrome) {
-                    //alert('22');
-                    console.log('Using native U2F support');
-                    var tag = document.createElement('script');
-                    tag.setAttribute('src', 'chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js');
-                    document.getElementsByTagName('head')[0].appendChild(tag);
+        <% if(tryU2F == null ) { %>
+            <script>
+                $(document).ready(function() {
+                    //alert('11');
+                    if(location.protocol == 'https:' && bowser.chrome) {
+                        //alert('22');
+                        console.log('Using native U2F support');
+                        var tag = document.createElement('script');
+                        tag.setAttribute('src', 'chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js');
+                        document.getElementsByTagName('head')[0].appendChild(tag);
 
-                    var request = {"challenge": "aj9cx6Cp-rLu1ynd4sBq8yQgAQ5XaHyfJJSHdX-OOgc", "version": "U2F_V2", "appId": "https://www.kd2.kr"};
-                    console.log("Register: ", request);
-                    $('#promptModal').modal({
-                        backdrop: 'static',
-                        keyboard: false,
-                        show: true
-                    });
-                    setTimeout(function()
-                    {
-                        console.log('go register');
-                        u2f.register([request], [], function(data) {
-                            console.log("Register callback", data);
-                            $('#promptModal').modal('hide');
-                            $('#bind-data').val(JSON.stringify(data));
-                            $('#bind-form').submit();
+                        var request = {"challenge": "aj9cx6Cp-rLu1ynd4sBq8yQgAQ5XaHyfJJSHdX-OOgc", "version": "U2F_V2", "appId": "https://www.kd2.kr"};
+                        console.log("Register: ", request);
+                        $('#promptModal').modal({
+                            backdrop: 'static',
+                            keyboard: false,
+                            show: true
                         });
-                    },1000);
-                }
-            });
-        </script>
+                        setTimeout(function()
+                        {
+                            console.log('go register');
+                            u2f.register([request], [], function(data) {
+                                console.log("Register callback", data);
+                                $('#promptModal').modal('hide');
+                                $('#bind_data').val(JSON.stringify(data));
+                                $('#bind-form').submit();
+                            });
+                        },1000);
+                    }
+                });
+            </script>
+        <% } %>
+
     <% } %>
 <% } %>
 

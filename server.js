@@ -112,11 +112,16 @@ app.get('/main', function(req,res)
     var activeTab = req.query.tab;
     if(activeTab == null)
         activeTab = arrTabMain[0];
-    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : activeTab, tryLogin : null });
+    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : activeTab, tryLogin : null, tryU2F:null });
 });
 app.post('/main', function(req,res){
     console.log(' - access main page with trying to log in');
-    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : 'Home', tryLogin : true});
+    var tryU2F = false;
+    if(req.body.bind_data != null)
+    {
+        tryU2F = true;
+    }
+    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : 'Home', tryLogin : true, tryU2F:true});
 });
 
 
