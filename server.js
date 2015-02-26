@@ -7,11 +7,11 @@ var fs = require('fs');
 var http = require('http');
 var https = require('https');
 var bodyParser = require('body-parser');
-
+var methodOverride = require('method-override');
+var session = require('session');
 
 var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.readFileSync('cert.pem')},app).listen(443);
 var httpServer = http.createServer(app).listen(80);
-
 
 app.set('port',443);
 app.set('view engine', 'ejs');
@@ -28,6 +28,10 @@ app.use('/js', express.static(__dirname + '/views/js'));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+//app.use(session());
+app.use(methodOverride());
+
 
 //app.all("*", function(req, res, next)
 //{   //when user request
@@ -104,7 +108,23 @@ app.post('/u2f', function(req,res)
     console.log(' - rendered.');
 });
 
+app.post('/login',function(req,res)
+{
+
+
+    res.end('<script> history.go(-1); </script>');
+});
+app.post('/validate',function(req,res)
+{
+
+    res.end('<script> history.go(-1); </script>');
+});
+
+/* Main Tab */
 var arrTabMain = ['Home', 'Register', 'Contact', 'About'];
+
+
+
 app.get('/main', function(req,res)
 {
     if(!req.secure)
@@ -116,14 +136,14 @@ app.get('/main', function(req,res)
     var activeTab = req.query.tab;
     if(activeTab == null)
         activeTab = arrTabMain[0];
-    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : activeTab, tryLogin : null, tryU2F:null });
+    res.render('./u2f_Home.ejs',{arrTab : arrTabMain, activeTab : activeTab, tryLogin : null, tryU2F:null });
 });
 app.post('/main', function(req,res){
     console.log(' - access main page with trying to log in');
     console.log(req.body);
     var tryU2F = (req.body['enroll-data'] == null);
 
-    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : 'Home', tryLogin : true, tryU2F:tryU2F});
+    res.render('./u2f_Home.ejs',{arrTab : arrTabMain, activeTab : 'Home', tryLogin : true, tryU2F:tryU2F});
 });
 
 

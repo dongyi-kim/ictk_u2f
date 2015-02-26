@@ -1,0 +1,10 @@
+<div class="masthead">
+    <h3 class="text-muted">ICTK U2F</h3>
+    <nav>
+        <ul class="nav nav-justified">
+            <% for(var i in arrTab ) { %>
+            <li <% if(arrTab[i]==activeTab) { %> class="active" <% }%> ><a href="?tab=<%=arrTab[i]%>"><%=arrTab[i]%></a></li>
+            <% } %>
+        </ul>
+    </nav>
+</div>

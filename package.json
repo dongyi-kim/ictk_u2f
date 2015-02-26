@@ -26,8 +26,11 @@
     "connect" : "3.3.4",
     "u2f" : "*",
     "ejs" : "*",
+    "jade" : "*",
     "express" : "5.0.0",
     "mongodb" : "2.0.14",
-    "body-parser" : "*"
+    "body-parser" : "*",
+    "connect-mongodb" : "*",
+    "method-override" : "*"
   }
 }

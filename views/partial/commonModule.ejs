@@ -1,0 +1,101 @@
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/bowser.min.js"></script>
+<script src="chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js"></script>
+
+<% if(tryLogin !== true) { %>
+    <!-- Modal -->
+    <div id="loginModal" class="modal fade"  >
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                    <h4 class="modal-title">Yubico Challenge</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-signin" method="post" action="#">
+                        <label for="inputEmail" class="sr-only">Email address</label>
+                        <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="user_email" required autofocus>
+                        <label for="inputPassword" class="sr-only">Password</label>
+                        <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="user_passwd" required>
+                        <button class="btn btn-lg btn-primary btn-block" href="#">Sign In</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" onClick="$('#loginModal').modal('hide');">Close</button>
+                    <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+<% } else { %>
+
+        <% if( tryU2F !== true ) { %>
+            <!-- Modal -->
+            <div id="promptModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                            <h4 class="modal-title">Yubico Challenge</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" id="bind-form" name="bind-form" method="post">
+                                <input type="hidden" name="mode" value="bind" />
+                                <input type="hidden" name="username" value="waps12b@ajou.ac.kr" />
+                                <input type="hidden" name="password" value="123" />
+                                <textarea style="display: none;" name="enroll-data">{"challenge": "XKN8Av3g-JVyksKaYVibGqR-Hn6uihwMPzXNInh3RG4", "version": "U2F_V2", "appId": "https://www.kd2.kr"}</textarea>
+                                <p>
+                                    <strong>Username:</strong> waps12b@ajou.ac.kr<br />
+                                    <strong>Origin:</strong> https://www.kd2.kr<br />
+                                    <strong>U2F enroll data: </strong><pre>{"challenge": "XKN8Av3g-JVyksKaYVibGqR-Hn6uihwMPzXNInh3RG4", "version": "U2F_V2", "appId": "https://www.kd2.kr"}</pre><br />
+                                </p>
+                                <textarea id="bind-data" name="data" class="span11 app_hide" style="display: none;" rows="8"></textarea>
+                                <br/>
+                                <input type="submit" class="btn btn-success app_hide" style="display: none;" value="Register" />
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" onClick="history.go(-1);">Abort</button>
+                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <script>
+                $(document).ready(function() {
+                    //alert('11');
+                    if(location.protocol == 'https:' && bowser.chrome) {
+                        //alert('22');
+                        console.log('Using native U2F support');
+                        var tag = document.createElement('script');
+                        tag.setAttribute('src', 'chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js');
+                        document.getElementsByTagName('head')[0].appendChild(tag);
+
+                        var request = {"challenge": "aj9cx6Cp-rLu1ynd4sBq8yQgAQ5XaHyfJJSHdX-OOgc", "version": "U2F_V2", "appId": "https://www.kd2.kr"};
+                        console.log("Register: ", request);
+                        $('#promptModal').modal({
+                            backdrop: 'static',
+                            keyboard: false,
+                            show: true
+                        });
+                        setTimeout(function()
+                        {
+                            console.log('go register');
+                            u2f.register([request], [], function(data) {
+                                console.log("Register callback", data);
+                                $('#promptModal').modal('hide');
+                                $('#bind-data').val(JSON.stringify(data));
+                                $('#bind-form').submit();
+                            });
+                        },1000);
+                    }
+                });
+            </script>
+        <% } %>
+<% } %>
