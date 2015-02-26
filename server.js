@@ -6,6 +6,8 @@ var app = express();
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
+var bodyParser = require('body-parser');
+
 
 var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.readFileSync('cert.pem')},app).listen(443);
 var httpServer = http.createServer(app).listen(80);
@@ -24,6 +26,8 @@ app.use('/bootstrap', express.static(__dirname + '/views/bootstrap'));
 app.use('/css', express.static(__dirname + '/views/css'));
 app.use('/js', express.static(__dirname + '/views/js'));
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 //app.all("*", function(req, res, next)
 //{   //when user request
@@ -38,9 +42,6 @@ app.use('/js', express.static(__dirname + '/views/js'));
 //    res.end();
 //    console.log(' request end');
 //});
-
-
-
 
 
 function u2f_send_request()
@@ -87,7 +88,7 @@ app.get('/u2f', function(req, res) {
     if(!req.secure)
     {
         //redirect http to https
-        return res.redirect('https://www.kd2.kr' + req.url);
+        return res.redirect('https://www.' + req.host + req.url);
     }
     console.log(' - user access the u2f page');
     res.render('./u2f_index.ejs', { user_email : '' , req_Sign_up : false} );
@@ -101,6 +102,28 @@ app.post('/u2f', function(req,res)
 
     res.render('./u2f_index.ejs', {user_email : req.params.user_email, req_Sign_up : true }, u2f_send_request() );
     console.log(' - rendered.');
+});
+
+var arrTabMain = ['Home', 'Register', 'Contact', 'About'];
+app.get('/main', function(req,res)
+{
+    if(!req.secure)
+    {
+        //redirect http to https
+        return res.redirect('https://www.' + req.host + req.url);
+    }
+    console.log(' - access main page');
+    var activeTab = req.query.tab;
+    if(activeTab == null)
+        activeTab = arrTabMain[0];
+    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : activeTab, tryLogin : null, tryU2F:null });
+});
+app.post('/main', function(req,res){
+    console.log(' - access main page with trying to log in');
+    console.log(req.body);
+    var tryU2F = (req.body['enroll-data'] == null);
+
+    res.render('./u2f_main.ejs',{arrTab : arrTabMain, activeTab : 'Home', tryLogin : true, tryU2F:tryU2F});
 });
 
 

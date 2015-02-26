@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Justified Nav Template for Bootstrap</title>
+
+
+    <link href="/css/signin.css" rel="stylesheet">
+
+    <!-- Bootstrap core CSS -->
+    <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="/css/justified-nav.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="masthead">
+        <h3 class="text-muted">ICTK U2F</h3>
+        <nav>
+            <ul class="nav nav-justified">
+                <% for(var i in arrTab ) { %>
+                    <li <% if(arrTab[i]==activeTab) { %> class="active" <% }%> ><a href="?tab=<%=arrTab[i]%>"><%=arrTab[i]%></a></li>
+                <% } %>
+            </ul>
+        </nav>
+    </div>
+
+    <% if(activeTab == 'Home') {  %>
+
+        <!-- Jumbotron -->
+        <div class="jumbotron">
+            <% if(tryU2F == false) { %>
+                <h1>Success</h1>
+            <% } else { %>
+                <h1>Please Log in!</h1>
+            <% } %>
+
+            <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet.</p>
+            <% if(tryLogin == null || tryLogin == false) { %>
+                <p><a class="btn btn-lg btn-success" role="button" onclick="showModal();" >Log in with your U2F</a></p>
+            <% } %>
+        </div>
+
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="col-lg-4">
+                <h2>Safari bug warning!</h2>
+                <p class="text-danger">As of v8.0, Safari exhibits a bug in which resizing your browser horizontally causes rendering errors in the justified nav that are cleared upon refreshing.</p>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+                <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
+                <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+            <div class="col-lg-4">
+                <h2>Heading</h2>
+                <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa.</p>
+                <p><a class="btn btn-primary" href="#" role="button">View details &raquo;</a></p>
+            </div>
+        </div>
+    <% } else if(activeTab=='Register') { %>
+
+    <% } else if(activeTab=='About') { %>
+
+    <% } else if(activeTab=='Contact') { %>
+
+    <% } %>
+
+    <!-- Site footer -->
+    <footer class="footer">
+        <p>&copy; ICTK dy.kim</p>
+    </footer>
+
+</div> <!-- /container -->
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="/bootstrap/js/bootstrap.min.js"></script>
+<script src="/js/bowser.min.js"></script>
+<script src="chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js"></script>
+
+
+<% if(activeTab == 'Home') { %>
+    <% if(tryLogin == null || tryLogin == false) { %>
+        <!-- Modal -->
+        <div id="loginModal" class="modal fade"  >
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                        <h4 class="modal-title">Yubico Challenge</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-signin" method="post" action="#">
+                            <label for="inputEmail" class="sr-only">Email address</label>
+                            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" name="user_email" required autofocus>
+                            <label for="inputPassword" class="sr-only">Password</label>
+                            <input type="password" id="inputPassword" class="form-control" placeholder="Password" name="user_passwd" required>
+                            <button class="btn btn-lg btn-primary btn-block" href="#">Sign In</button>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" onClick="history.go(-1);">Abort</button>
+                        <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
+        <script>
+            function showModal()
+            {
+                $('#loginModal').modal('show');
+            }
+        </script>
+    <% } else { %>
+        <% if( tryU2F === true ) { %>
+            <!-- Modal -->
+            <div id="promptModal" class="modal fade">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>-->
+                            <h4 class="modal-title">Yubico Challenge</h4>
+                        </div>
+                        <div class="modal-body">
+                            <form action="#" id="bind-form" name="bind-form" method="post">
+                                <input type="hidden" name="mode" value="bind" />
+                                <input type="hidden" name="username" value="waps12b@ajou.ac.kr" />
+                                <input type="hidden" name="password" value="123" />
+                                <textarea style="display: none;" name="enroll-data">{"challenge": "XKN8Av3g-JVyksKaYVibGqR-Hn6uihwMPzXNInh3RG4", "version": "U2F_V2", "appId": "https://www.kd2.kr"}</textarea>
+                                <p>
+                                    <strong>Username:</strong> waps12b@ajou.ac.kr<br />
+                                    <strong>Origin:</strong> https://www.kd2.kr<br />
+                                    <strong>U2F enroll data: </strong><pre>{"challenge": "XKN8Av3g-JVyksKaYVibGqR-Hn6uihwMPzXNInh3RG4", "version": "U2F_V2", "appId": "https://www.kd2.kr"}</pre><br />
+                                </p>
+                                <textarea id="bind-data" name="data" class="span11 app_hide" style="display: none;" rows="8"></textarea>
+                                <br/>
+                                <input type="submit" class="btn btn-success app_hide" style="display: none;" value="Register" />
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" onClick="history.go(-1);">Abort</button>
+                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                        </div>
+                    </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+            </div><!-- /.modal -->
+            <script>
+                $(document).ready(function() {
+                    //alert('11');
+                    if(location.protocol == 'https:' && bowser.chrome) {
+                        //alert('22');
+                        console.log('Using native U2F support');
+                        var tag = document.createElement('script');
+                        tag.setAttribute('src', 'chrome-extension://pfboblefjcgdjicmnffhdgionmgcdmne/u2f-api.js');
+                        document.getElementsByTagName('head')[0].appendChild(tag);
+
+                        var request = {"challenge": "aj9cx6Cp-rLu1ynd4sBq8yQgAQ5XaHyfJJSHdX-OOgc", "version": "U2F_V2", "appId": "https://www.kd2.kr"};
+                        console.log("Register: ", request);
+                        $('#promptModal').modal({
+                            backdrop: 'static',
+                            keyboard: false,
+                            show: true
+                        });
+                        setTimeout(function()
+                        {
+                            console.log('go register');
+                            u2f.register([request], [], function(data) {
+                                console.log("Register callback", data);
+                                $('#promptModal').modal('hide');
+                                $('#bind-data').val(JSON.stringify(data));
+                                $('#bind-form').submit();
+                            });
+                        },1000);
+                    }
+                });
+            </script>
+        <% } %>
+    <% } %>
+<% } %>
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+</body>
+</html>
+
