@@ -9,6 +9,7 @@
 
 <% if(tryLogin !== true) { %>
     <!-- Modal -->
+    <!--need to login -->
     <div id="loginModal" class="modal fade"  >
         <div class="modal-dialog">
             <div class="modal-content">
@@ -34,7 +35,6 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 <% } else { %>
-
         <% if( tryU2F !== true ) { %>
             <!-- Modal -->
             <div id="promptModal" class="modal fade">
