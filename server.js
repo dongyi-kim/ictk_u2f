@@ -1,15 +1,23 @@
 
 var u2flib = require('u2f');
+
 var express = require('express');
-var app = express();
+var session = require('express-session');
 
 var fs = require('fs');
 var http = require('http');
 var https = require('https');
 var bodyParser = require('body-parser');
+var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
-var session = require('session');
+
+//global constants
 var config = require('./config.js');
+
+
+
+/* App Setting */
+var app = express();
 
 var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.readFileSync('cert.pem')},app);
 var httpServer = http.createServer(app);
@@ -27,8 +35,14 @@ app.use('/bootstrap', express.static(__dirname + '/views/bootstrap'));
 app.use('/css', express.static(__dirname + '/views/css'));
 app.use('/js', express.static(__dirname + '/views/js'));
 
+//app.use(bodyParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(cookieParser());
+
+//app.use(session({secret:'secret key', key:'fundoong', cookie : {maxAge:80*1000}}));
+app.use(session());
 
 //app.use(session());
 app.use(methodOverride());

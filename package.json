@@ -28,8 +28,10 @@
     "ejs" : "*",
     "jade" : "*",
     "express" : "5.0.0",
+    "express-session" : "*",
     "mongodb" : "2.0.14",
     "body-parser" : "*",
+    "cookie-parser" : "*",
     "connect-mongodb" : "*",
     "method-override" : "*"
   }
