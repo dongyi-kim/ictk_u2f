@@ -71,6 +71,7 @@ function u2f_send_request()
 
 app.get('*', function(req,res,next)
 {
+    console.log('app get *');
     if(!req.secure)
     {
         //redirect http to https
