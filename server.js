@@ -12,7 +12,7 @@ var session = require('session');
 var config = require('./config.js');
 
 var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.readFileSync('cert.pem')},app);
-//var httpServer = http.createServer(app).liste;
+var httpServer = http.createServer(app);
 
 app.set('port',443);
 app.set('view engine', 'ejs');
@@ -139,5 +139,6 @@ app.post('/main', function(req,res){
 });
 
 
-app.listen();
+httpsServer.listen();
+httpServer.listen();
 console.log('Server open\n');
