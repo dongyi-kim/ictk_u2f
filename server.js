@@ -14,7 +14,7 @@ var config = require('./config.js');
 var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.readFileSync('cert.pem')},app);
 var httpServer = http.createServer(app);
 
-app.set('port',443);
+//app.set('port',443);
 app.set('view engine', 'ejs');
 app.set('view options', {
     layout: false
@@ -139,6 +139,6 @@ app.post('/main', function(req,res){
 });
 
 
-httpsServer.listen();
-httpServer.listen();
+httpsServer.listen(443);
+httpServer.listen(80);
 console.log('Server open\n');
