@@ -3,6 +3,7 @@ var u2flib = require('u2f');
 
 var express = require('express');
 var session = require('express-session');
+var sessionStore = require('connect-mongodb');
 
 var fs = require('fs');
 var http = require('http');
@@ -23,7 +24,8 @@ var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.r
 var httpServer = http.createServer(app);
 
 //app.set('port',443);
-app.set('view engine', 'ejs');
+app.engine('ejs',require('ejs').__express);
+//app.set('view engine', 'ejs');
 app.set('view options', {
     layout: false
 });
@@ -42,8 +44,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 //app.use(session({secret:'secret key', key:'fundoong', cookie : {maxAge:80*1000}}));
-app.use(session());
-
+//app.use(session({
+//    secret: cookie_secret,
+//    name: cookie_name,
+//    store: sessionStore, // connect-mongo session store
+//    proxy: true
+//}));
 //app.use(session());
 app.use(methodOverride());
 
