@@ -42,7 +42,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 //app.use(session({secret:'secret key', key:'fundoong', cookie : {maxAge:80*1000}}));
-app.use(session());
+app.use(session({
+    secret: 'some secret?',
+    resave: true,
+    saveUninitialized: true
+}));
 
 //app.use(session());
 app.use(methodOverride());

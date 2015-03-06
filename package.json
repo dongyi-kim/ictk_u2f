@@ -1,38 +1,37 @@
 {
 
 
-  "name": "u2f",
+  "name": "ictk_u2f",
   "version": "0.1.1",
   "description": "U2F 2-factor authentication library",
   "repository": {
     "type": "git",
-    "url": "https://github.com/ashtuchkin/u2f"
+    "url": "https://github.com/waps12b/ictk_u2f"
   },
   "keywords": [
     "U2F",
     "2-factor",
     "authentication"
   ],
-  "author": "Alexander Shtuchkin <ashtuchkin@gmail.com>",
-  "license": "MIT",
+  "author": "dongyi kim<waps12b@naver.com>",
+  "license": "??",
   "bugs": {
-    "url": "https://github.com/ashtuchkin/u2f/issues"
+    "url": "https://github.com/waps12b/ictk_u2f/issues"
   },
-  "homepage": "https://github.com/ashtuchkin/u2f",
+  "homepage": "https://github.com/waps12b/ictk_u2f",
   "devDependencies": {
-    "mocha": "2" 
+
   },
   "dependencies":{
-    "connect" : "3.3.4",
+    "mocha": "2",
     "u2f" : "*",
     "ejs" : "*",
-    "jade" : "*",
-    "express" : "5.0.0",
+    "express" : "4.*",
     "express-session" : "*",
     "mongodb" : "2.0.14",
     "body-parser" : "*",
     "cookie-parser" : "*",
-    "connect-mongodb" : "*",
-    "method-override" : "*"
+    "method-override" : "*",
+    "coffee-script" : "*"
   }
 }
