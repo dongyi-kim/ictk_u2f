@@ -3,7 +3,6 @@ var u2flib = require('u2f');
 
 var express = require('express');
 var session = require('express-session');
-var sessionStore = require('connect-mongodb');
 
 var fs = require('fs');
 var http = require('http');
@@ -13,14 +12,14 @@ var cookieParser = require('cookie-parser');
 var methodOverride = require('method-override');
 
 //global constants
-var config = require('./config.js');
+var config = require('./src/config.js');
 
 
 
 /* App Setting */
 var app = express();
 
-var httpsServer = https.createServer({key:fs.readFileSync('key.pem'), cert: fs.readFileSync('cert.pem')},app);
+var httpsServer = https.createServer({key:fs.readFileSync('asset/key.pem'), cert: fs.readFileSync('asset/cert.pem')},app);
 var httpServer = http.createServer(app);
 
 //app.set('port',443);
@@ -30,6 +29,7 @@ app.set('view options', {
     layout: false
 });
 //http://getbootstrap.com/javascript/
+
 
 /* Directory Setting */
 app.use('/public', express.static(__dirname));
@@ -44,22 +44,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 //app.use(session({secret:'secret key', key:'fundoong', cookie : {maxAge:80*1000}}));
-<<<<<<< HEAD
 app.use(session({
     secret: 'some secret?',
     resave: true,
     saveUninitialized: true
 }));
 
-=======
-//app.use(session({
-//    secret: cookie_secret,
-//    name: cookie_name,
-//    store: sessionStore, // connect-mongo session store
-//    proxy: true
-//}));
->>>>>>> 6f284f5bca52cfa047f1973d438b65b12f8c1990
-//app.use(session());
 app.use(methodOverride());
 
 
