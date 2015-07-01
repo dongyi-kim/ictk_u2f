@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> u2f sample applicationb for ICTK</title>
+
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="js/u2f-api.js"></script>
+	</head>
+
+	<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+
+				<h2>Registration</h2>
+				<form action="" id="bind-form" name="bind-form" method="post">
+				  	<div class="form-group">
+				    	<label for="useremail">Email address</label>
+				    	<input type="email" class="form-control" id="useremail" placeholder="Email" name="user_id">
+				  	</div>
+				  	<div class="form-group">
+				   		<label for="userpassword">Password</label>
+				    	<input type="password" class="form-control" id="userpassword" placeholder="Password" name="user_pw">
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="userpassword_confirm">Password Confirm</label>
+				    	<input type="password" class="form-control" id="userpassword_confirm" placeholder="Password Confirm">
+				  	</div>
+			 		<textarea id="bind-data" name="data" class="span11 app_hide" style="display: none;" rows="8"></textarea>
+				  	<input type="button" class="btn btn-default" onClick="doRegister();" value="Submit" />
+				</form>
+
+			</div>
+
+		</div>
+	</div>
+
+	<div class="modal fade" id="myModal" role="dialog" tabindex="-1">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">U2F Registration</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<h3>Auth Data</h3>
+	      	<strong> Version </strong> <%=data.version%><br>
+	      	<strong> App ID </strong> <%=data.appId%><br>
+	      	<strong> Challenge </strong> <%=data.challenge%><br>
+
+
+
+	      </div>
+	      <div class="modal-footer">
+	      	<p>Connect and touch your FIDO U2F Key for Registration. </p>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal --> 
+
+    <script type="text/javascript">
+	    function decodeHtml(html) {
+		    var txt = document.createElement("textarea");
+		    txt.innerHTML = html;
+		    return txt.value;
+		}
+
+		function doRegister()
+		{
+			//id length check 
+			var uid = $('#useremail').val();
+			if(uid.length < 5 || uid.length > 30 )
+			{
+				alert('Invalid ID length');
+				return;
+			}
+
+			//password confirm check
+			if( $('#userpassword').val() !== $('#userpassword_confirm').val() )
+			{
+				alert('Password Confirmation failed.');
+				return;
+			}
+
+			//password length check
+			var upw = $('#userpassword').val();
+			if( upw.length  < 5 || upw.length > 30)
+			{
+				alert('Invalid Password length.');
+				return;
+			}
+
+			//u2f registration 
+	      	$('#myModal').modal({
+				keyboard: false,
+			 	show : true,
+			 	backdrop : 'static'
+			});
+	      	var request = JSON.parse(decodeHtml("<%=data_str%>"));
+	      	console.log(request);
+		  	u2f.register([request], [], function(data) {
+		    	console.log("Register callback", data);
+			    $('#bind-data').val(JSON.stringify(data));
+			    $('#bind-form').submit();
+		    	//$('#myModal').modal('hide');
+		  	});
+		}
+	    </script>
+	</body>
+</html>
+

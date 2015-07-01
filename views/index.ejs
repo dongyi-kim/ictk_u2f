@@ -2,6 +2,10 @@
 <html>
 	<head>
 		<title> u2f sample applicationb for ICTK</title>
+
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
 		<!-- Latest compiled and minified CSS -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 
@@ -16,23 +20,53 @@
 	<body>
 	<div class="container">
 		<div class="row">
+			<div class="col-md-12">
 
-			<h2> U2F Sample Web Application for ICTK </h2>
-			<form>
-			  <div class="form-group">
-			    <label for="exampleInputEmail1">Email address</label>
-			    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
-			  </div>
-			  <div class="form-group">
-			    <label for="exampleInputPassword1">Password</label>
-			    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-			  </div>
-			  <button type="submit" class="btn btn-default">Submit</button>
-			</form>
+				<h2>Login</h2>
+				<form action="/auth" id="bind-form" name="bind-form" method="post">
+				  	<div class="form-group">
+				    	<label for="useremail">Email address</label>
+				    	<input type="email" class="form-control" id="useremail" placeholder="Email" name="user_id">
+				  	</div>
+				  	<div class="form-group">
+				   		<label for="userpassword">Password</label>
+				    	<input type="password" class="form-control" id="userpassword" placeholder="Password" name="user_pw">
+				  	</div>
+				  	<input type="button" class="btn btn-default" onClick="doAuth();" value="Submit" />
+				  	<a href="/register"> <input type="button" class="btn btn-default" value="Register" /></a>
+				</form>
+
+			</div>
 
 		</div>
 	</div>
 
+
+    <script type="text/javascript">
+
+
+		function doAuth()
+		{
+			//id length check 
+			var uid = $('#useremail').val();
+			if(uid.length < 5 || uid.length > 30 )
+			{
+				alert('Invalid ID length');
+				return;
+			}
+
+			//password length check
+			var upw = $('#userpassword').val();
+			if( upw.length  < 5 || upw.length > 30)
+			{
+				alert('Invalid Password length.');
+				return;
+			}
+
+		    $('#bind-form').submit();
+
+		}
+	    </script>
 	</body>
 </html>
 

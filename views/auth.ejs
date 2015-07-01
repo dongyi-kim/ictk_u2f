@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> u2f sample applicationb for ICTK</title>
+
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+		<script src="js/u2f-api.js"></script>
+	</head>
+
+	<body>
+
+	<div class="modal fade" id="myModal" role="dialog" tabindex="-1">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h4 class="modal-title">U2F Authentication</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<h3>Auth Data</h3>
+	      	<strong> Version </strong> <%=data.version%><br>
+	      	<strong> App ID </strong> <%=data.appId%><br>
+	      	<strong> Challenge </strong> <%=data.challenge%><br>
+			<form action="/u2fauth" id="bind-form" name="bind-form" method="post">
+	 			<textarea id="bind-data" name="data" class="span11 app_hide" style="display: none;" rows="8"></textarea>
+	 		</form>
+
+
+	      </div>
+	      <div class="modal-footer">
+	      	<p>Connect and touch your FIDO U2F Key for Authentication. </p>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal --> 
+
+    <script type="text/javascript">
+	    function decodeHtml(html) {
+		    var txt = document.createElement("textarea");
+		    txt.innerHTML = html;
+		    return txt.value;
+		}
+
+		$( document ).ready(function() {
+			//u2f registration 
+	      	$('#myModal').modal({
+				keyboard: false,
+			 	show : true,
+			 	backdrop : 'static'
+			});
+	      	var request = JSON.parse(decodeHtml("<%=data_str%>"));
+	      	console.log(request);
+		  	u2f.sign([request], function(data) {
+		    	console.log("Sign callback", data);
+			    $('#bind-data').val(JSON.stringify(data));
+			    $('#bind-form').submit();
+		  	});
+		});
+	    </script>
+	</body>
+</html>
+
